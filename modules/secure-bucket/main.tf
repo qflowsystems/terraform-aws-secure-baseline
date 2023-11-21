@@ -1,7 +1,7 @@
 data "aws_iam_policy_document" "access_log_policy" {
   statement {
-    actions = ["s3:*"]
-    effect  = "Deny"
+    actions   = ["s3:*"]
+    effect    = "Deny"
     resources = [
       aws_s3_bucket.access_log.arn,
       "${aws_s3_bucket.access_log.arn}/*"
@@ -23,11 +23,6 @@ resource "aws_s3_bucket" "access_log" {
   force_destroy = var.force_destroy
 
   tags = var.tags
-}
-
-resource "aws_s3_bucket_acl" "access_log" {
-  bucket = aws_s3_bucket.access_log.id
-  acl    = "log-delivery-write"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "access_log" {
@@ -84,11 +79,6 @@ resource "aws_s3_bucket" "content" {
   depends_on = [
     aws_s3_bucket_public_access_block.access_log
   ]
-}
-
-resource "aws_s3_bucket_acl" "content" {
-  bucket = aws_s3_bucket.content.id
-  acl    = "private"
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "content" {
