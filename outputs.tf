@@ -54,28 +54,28 @@ output "config_iam_role" {
   value       = aws_iam_role.recorder
 }
 
-output "config_configuration_recorder" {
-  description = "The configuration recorder in each region."
-
-  value = {
-    "ap-northeast-1" = one(module.config_baseline_ap-northeast-1[*].configuration_recorder)
-    "ap-northeast-2" = one(module.config_baseline_ap-northeast-2[*].configuration_recorder)
-    "ap-northeast-3" = one(module.config_baseline_ap-northeast-3[*].configuration_recorder)
-    "ap-south-1"     = one(module.config_baseline_ap-south-1[*].configuration_recorder)
-    "ap-southeast-1" = one(module.config_baseline_ap-southeast-1[*].configuration_recorder)
-    "ap-southeast-2" = one(module.config_baseline_ap-southeast-2[*].configuration_recorder)
-    "ca-central-1"   = one(module.config_baseline_ca-central-1[*].configuration_recorder)
-    "eu-central-1"   = one(module.config_baseline_eu-central-1[*].configuration_recorder)
-    "eu-west-1"      = one(module.config_baseline_eu-west-1[*].configuration_recorder)
-    "eu-west-2"      = one(module.config_baseline_eu-west-2[*].configuration_recorder)
-    "eu-west-3"      = one(module.config_baseline_eu-west-3[*].configuration_recorder)
-    "sa-east-1"      = one(module.config_baseline_sa-east-1[*].configuration_recorder)
-    "us-east-1"      = one(module.config_baseline_us-east-1[*].configuration_recorder)
-    "us-east-2"      = one(module.config_baseline_us-east-2[*].configuration_recorder)
-    "us-west-1"      = one(module.config_baseline_us-west-1[*].configuration_recorder)
-    "us-west-2"      = one(module.config_baseline_us-west-2[*].configuration_recorder)
-  }
-}
+#output "config_configuration_recorder" {
+#  description = "The configuration recorder in each region."
+#
+#  value = {
+#    "ap-northeast-1" = one(module.config_baseline_ap-northeast-1[*].configuration_recorder)
+#    "ap-northeast-2" = one(module.config_baseline_ap-northeast-2[*].configuration_recorder)
+#    "ap-northeast-3" = one(module.config_baseline_ap-northeast-3[*].configuration_recorder)
+#    "ap-south-1"     = one(module.config_baseline_ap-south-1[*].configuration_recorder)
+#    "ap-southeast-1" = one(module.config_baseline_ap-southeast-1[*].configuration_recorder)
+#    "ap-southeast-2" = one(module.config_baseline_ap-southeast-2[*].configuration_recorder)
+#    "ca-central-1"   = one(module.config_baseline_ca-central-1[*].configuration_recorder)
+#    "eu-central-1"   = one(module.config_baseline_eu-central-1[*].configuration_recorder)
+#    "eu-west-1"      = one(module.config_baseline_eu-west-1[*].configuration_recorder)
+#    "eu-west-2"      = one(module.config_baseline_eu-west-2[*].configuration_recorder)
+#    "eu-west-3"      = one(module.config_baseline_eu-west-3[*].configuration_recorder)
+#    "sa-east-1"      = one(module.config_baseline_sa-east-1[*].configuration_recorder)
+#    "us-east-1"      = one(module.config_baseline_us-east-1[*].configuration_recorder)
+#    "us-east-2"      = one(module.config_baseline_us-east-2[*].configuration_recorder)
+#    "us-west-1"      = one(module.config_baseline_us-west-1[*].configuration_recorder)
+#    "us-west-2"      = one(module.config_baseline_us-west-2[*].configuration_recorder)
+#  }
+#}
 
 output "config_sns_topic" {
   description = "The SNS topic) that AWS Config delivers notifications to."
