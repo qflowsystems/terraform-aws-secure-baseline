@@ -30,37 +30,39 @@ data "aws_iam_policy_document" "config-sns-policy" {
     condition {
       test     = "ArnLike"
       variable = "aws:SourceArn"
-      values   = ["arn:aws:config:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*"]
+      values   = [
+        "arn:aws:config:${data.aws_region.current.name}:${data.aws_caller_identity.current.account_id}:*"
+      ]
     }
   }
 }
 
-resource "aws_config_configuration_recorder" "recorder" {
-  name     = var.recorder_name
-  role_arn = var.iam_role_arn
-
-  recording_group {
-    all_supported                 = true
-    include_global_resource_types = var.include_global_resource_types
-  }
-}
-
-resource "aws_config_delivery_channel" "bucket" {
-  name           = var.delivery_channel_name
-  s3_bucket_name = var.s3_bucket_name
-  s3_key_prefix  = var.s3_key_prefix
-  sns_topic_arn  = aws_sns_topic.config.arn
-
-  snapshot_delivery_properties {
-    delivery_frequency = var.delivery_frequency
-  }
-
-  depends_on = [aws_config_configuration_recorder.recorder]
-}
-
-resource "aws_config_configuration_recorder_status" "recorder" {
-  name       = aws_config_configuration_recorder.recorder.id
-  is_enabled = true
-
-  depends_on = [aws_config_delivery_channel.bucket]
-}
+#resource "aws_config_configuration_recorder" "recorder" {
+#  name     = var.recorder_name
+#  role_arn = var.iam_role_arn
+#
+#  recording_group {
+#    all_supported                 = true
+#    include_global_resource_types = var.include_global_resource_types
+#  }
+#}
+#
+#resource "aws_config_delivery_channel" "bucket" {
+#  name           = var.delivery_channel_name
+#  s3_bucket_name = var.s3_bucket_name
+#  s3_key_prefix  = var.s3_key_prefix
+#  sns_topic_arn  = aws_sns_topic.config.arn
+#
+#  snapshot_delivery_properties {
+#    delivery_frequency = var.delivery_frequency
+#  }
+#
+#  depends_on = [aws_config_configuration_recorder.recorder]
+#}
+#
+#resource "aws_config_configuration_recorder_status" "recorder" {
+#  name       = aws_config_configuration_recorder.recorder.id
+#  is_enabled = true
+#
+#  depends_on = [aws_config_delivery_channel.bucket]
+#}
